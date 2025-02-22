@@ -1,0 +1,121 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maharashtra Government Translation Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-orange-600 shadow-lg">
+        <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Seal_of_Maharashtra.svg/1200px-Seal_of_Maharashtra.svg.png" alt="Maharashtra Emblem" class="h-16">
+                <div class="ml-4">
+                    <h1 class="text-white text-2xl font-bold">Maharashtra Government</h1>
+                    <h2 class="text-white text-lg">Translation Services Portal</h2>
+                </div>
+            </div>
+            <div class="flex space-x-4">
+                <button class="bg-white px-4 py-2 rounded-lg text-orange-600 hover:bg-orange-100">English</button>
+                <button class="bg-white px-4 py-2 rounded-lg text-orange-600 hover:bg-orange-100">मराठी</button>
+                <button class="bg-white px-4 py-2 rounded-lg text-orange-600 hover:bg-orange-100">हिंदी</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Text Translation Card -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Text Translation</h3>
+                <div class="space-y-4">
+                    <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Enter text to translate..."></textarea>
+                    <select class="w-full p-2 border rounded-lg">
+                        {% for code, lang in languages.items() %}
+                        <option value="{{ code }}">{{ lang }}</option>
+                        {% endfor %}
+                    </select>
+                    <button class="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700">
+                        Translate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Live Translation Card -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Live Meeting Translation</h3>
+                <p class="text-gray-600 mb-4">Get real-time translations during government meetings and proceedings.</p>
+                <a href="/live-translation" class="block w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 text-center">
+                    Join Live Session
+                </a>
+            </div>
+
+            <!-- Emergency Alerts Card -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Emergency Alerts</h3>
+                <p class="text-gray-600 mb-4">Important government announcements and emergency notifications in multiple languages.</p>
+                <a href="/emergency-alerts" class="block w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 text-center">
+                    View Alerts
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-8">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contact Us</h4>
+                    <p>Government of Maharashtra</p>
+                    <p>Mantralaya, Mumbai - 400032</p>
+                    <p>Email: translation@maharashtra.gov.in</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-orange-400">About Us</a></li>
+                        <li><a href="#" class="hover:text-orange-400">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-orange-400">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-orange-400">Twitter</a>
+                        <a href="#" class="hover:text-orange-400">Facebook</a>
+                        <a href="#" class="hover:text-orange-400">Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

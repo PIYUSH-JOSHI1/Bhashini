@@ -1,0 +1,100 @@
+/* static/css/style.css */
+/* Custom styles for Maharashtra Government Translation Portal */
+
+/* Typography */
+@font-face {
+    font-family: 'Mukta';
+    src: url('https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;700&display=swap');
+}
+
+body {
+    font-family: 'Mukta', sans-serif;
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Header Styles */
+header {
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Card Hover Effects */
+.hover\:shadow-lg {
+    transition: all 0.3s ease;
+}
+
+.hover\:shadow-lg:hover {
+    transform: translateY(-2px);
+}
+
+/* Custom Button Styles */
+.custom-button {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+    transition: all 0.3s ease;
+}
+
+.custom-button:hover {
+    background: linear-gradient(135deg, #ff8e53 0%, #ff6b6b 100%);
+    transform: translateY(-1px);
+}
+
+/* Emergency Alert Styles */
+.emergency-alert {
+    border-left: 4px solid #ef4444;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Language Selector Styles */
+.language-selector {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff6b6b;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff8e53;
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Accessibility Styles */
+:focus {
+    outline: 2px solid #ff6b6b;
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    .no-print {
+        display: none;
+    }
+}

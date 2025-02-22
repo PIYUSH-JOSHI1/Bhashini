@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>महाराष्ट्र बहुभाषी अनुवादक | Maharashtra Multilingual Translator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/emblem.png') }}" alt="भारत सरकार प्रतीक" class="emblem">
+            <h1>महाराष्ट्र बहुभाषी अनुवादक</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">मुख्य पृष्ठ</a></li>
+                <li><a href="#">सेवाएँ</a></li>
+                <li><a href="#">संपर्क करें</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2023 महाराष्ट्र सरकार। सर्वाधिकार सुरक्षित।</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
