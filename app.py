@@ -96,5 +96,3 @@ def handle_video_frame(data):
     })
 
 
-if __name__ == '__main__':
-    socketio.run(app, debug=True)
