@@ -5,3 +5,5 @@ eventlet
 gunicorn
 numpy
 opencv-python-headless
+SpeechRecognition
+pyaudio
