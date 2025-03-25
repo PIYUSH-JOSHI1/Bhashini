@@ -1,90 +1,45 @@
 import speech_recognition as sr
-from google.cloud import speech_v1
-from google.cloud import translate_v2
-import pyaudio
-import wave
-import threading
-import queue
-import os
-from datetime import datetime
 
 class SpeechService:
     def __init__(self):
         self.recognizer = sr.Recognizer()
-        self.speech_client = speech_v1.SpeechClient()
-        self.translate_client = translate_v2.Client()
-        self.audio_queue = queue.Queue()
-        self.is_recording = False
-        
-        # Audio recording settings
-        self.CHUNK = 1024
-        self.FORMAT = pyaudio.paInt16
-        self.CHANNELS = 1
-        self.RATE = 16000
-        
+        # Fallback to standard microphone
+        self.microphone = sr.Microphone()
+
     def start_recording(self):
-        """Start recording audio"""
-        self.is_recording = True
-        self.recording_thread = threading.Thread(target=self._record_audio)
-        self.recording_thread.start()
-        
+        """Placeholder for recording start"""
+        pass
+
     def stop_recording(self):
-        """Stop recording audio"""
-        self.is_recording = False
-        if hasattr(self, 'recording_thread'):
-            self.recording_thread.join()
-            
-    def _record_audio(self):
-        """Record audio in chunks and add to queue"""
-        p = pyaudio.PyAudio()
-        stream = p.open(format=self.FORMAT,
-                       channels=self.CHANNELS,
-                       rate=self.RATE,
-                       input=True,
-                       frames_per_buffer=self.CHUNK)
-        
-        while self.is_recording:
-            data = stream.read(self.CHUNK)
-            self.audio_queue.put(data)
-            
-        stream.stop_stream()
-        stream.close()
-        p.terminate()
-        
+        """Placeholder for recording stop"""
+        pass
+
     def process_audio(self, target_language='en'):
-        """Process audio chunks and return transcription"""
-        # Collect audio data from queue
-        audio_data = b''
-        while not self.audio_queue.empty():
-            audio_data += self.audio_queue.get()
-            
-        if not audio_data:
-            return None
-            
-        # Save temporary audio file
-        temp_filename = f"temp_audio_{datetime.now().strftime('%Y%m%d_%H%M%S')}.wav"
-        with wave.open(temp_filename, 'wb') as wf:
-            wf.setnchannels(self.CHANNELS)
-            wf.setsampwidth(pyaudio.PyAudio().get_sample_size(self.FORMAT))
-            wf.setframerate(self.RATE)
-            wf.writeframes(audio_data)
-            
-        # Perform speech recognition
+        """
+        Process audio and return transcribed text
+        
+        Note: This is a simplified version without advanced features
+        """
         try:
-            with sr.AudioFile(temp_filename) as source:
-                audio = self.recognizer.record(source)
-                text = self.recognizer.recognize_google(audio)
+            with self.microphone as source:
+                # Adjust for ambient noise
+                self.recognizer.adjust_for_ambient_noise(source, duration=0.5)
                 
-                # Translate if needed
-                if target_language != 'en':
-                    translation = self.translate_client.translate(
-                        text,
-                        target_language=target_language
-                    )
-                    text = translation['translatedText']
-                    
-                return text
-        finally:
-            # Clean up temporary file
-            if os.path.exists(temp_filename):
-                os.remove(temp_filename)
+                # Listen for audio input
+                audio = self.recognizer.listen(source, timeout=5)
+                
+                # Attempt speech recognition
+                try:
+                    # Try Google Speech Recognition
+                    text = self.recognizer.recognize_google(audio)
+                    return text
+                except sr.UnknownValueError:
+                    print("Could not understand audio")
+                except sr.RequestError:
+                    print("Could not request results")
+            
+            return None
+        
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return None
